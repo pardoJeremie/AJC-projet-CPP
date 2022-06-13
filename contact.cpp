@@ -68,4 +68,6 @@ std::ostream& operator<< (std::ostream& os, const contact& objcontact) {
     os << objcontact.tostring();
     return os;
 }
-bool strcontainnumber (std::string s) {return std::find_if(s.begin(), s.end(), ::isdigit) != s.end();}
+bool strcontainnumber (std::string s) {
+    return std::find_if(s.begin(), s.end(), ::isdigit) != s.end(); //utiliser regex?
+}

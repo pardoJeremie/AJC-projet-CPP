@@ -11,6 +11,7 @@
 #include <stdio.h>
 #include "contact.hpp"
 #include "address.hpp"
+
 #define COMPANY_NAME_MAX_SIZE 50
 #define EMAIL_MAX_SIZE 50
 

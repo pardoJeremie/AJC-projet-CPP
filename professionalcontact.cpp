@@ -5,8 +5,10 @@
 //  Created by pardo jérémie on 13/06/2022.
 //
 
-#include "professionalcontact.hpp"
+#include <sstream>
 #include <regex>
+#include "professionalcontact.hpp"
+
 
 professionalcontact::professionalcontact (/*constact*/ std::string firstname, std::string lastname, enumgender gender,/*add*/ address* addpostal,/*private*/ std::string companyname, std::string email) : contact (firstname, lastname, gender) {
     setcompanyname (companyname);
@@ -20,7 +22,9 @@ professionalcontact::~professionalcontact () {
 }
 
 std::string professionalcontact::tostring() const {
-    return "professional contact";
+    std::ostringstream oss;
+    oss << "Professionnel : " << tostringid() << "\n\n\tSociété : "<< companyname << "\n\tContact : " << tostringwho() << "\n\t" << addpostal->tostringlibelle() << "\n\t" << addpostal->tostringpostalcode() << " " << addpostal->gettown() << "\n\n\tMail : " << email << "\n\n" ;
+    return oss.str();
 }
 
 void professionalcontact::setcompanyname (std::string companyname) {

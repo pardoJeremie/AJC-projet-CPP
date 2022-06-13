@@ -19,14 +19,14 @@ int main(int argc, const char * argv[]) {
     contact* a = nullptr;
     contact* b = nullptr;
     try {
-        a = new privatecontact ("roberts","bartholomew", enumgender::M,new address (13,"rue des moignons","",97018,"pirate town"),new date (1,1,2000));
+        a = new privatecontact ("roberts","bartholomew", enumgender::M,new address (13,"rue des moignons","",97018,"pirate town"),new date (13,6,2000));
     }catch ( std::invalid_argument exp) {
         std::cout << "Errer in init private contact:\n  " << exp.what() << std::endl;
         delete a;
         a = nullptr;
     }
     try {
-    b = new professionalcontact ("jorge","Grotadmorv", enumgender::M,new address (2,"rue des poubelle","",97018,"ordure ville"),"Le Roy du recyclage","jorge..Gotadmorv.192@gmail.com");
+    b = new professionalcontact ("jorge","Grotadmorv", enumgender::M,new address (2,"rue des poubelles","",97018,"ordure ville"),"Le Roy du recyclage","jorge.Gotadmorv.192@gmail.com");
     }catch ( std::invalid_argument exp) {
         std::cout << "Errer in init professional contact:\n  " << exp.what() << std::endl;
         delete b;

@@ -26,7 +26,7 @@ unsigned short date::getage () const {
     std::time_t t = std::time(0);
     std::tm* now = std::localtime(&t);
     
-    unsigned short age = year - (now->tm_year + 1900);
+    unsigned short age = (now->tm_year + 1900) - year;
     
     if (!(month > (now->tm_mon + 1)) && !(month == (now->tm_mon + 1) && day >= now->tm_mday))
         age--;

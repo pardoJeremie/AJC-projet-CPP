@@ -24,10 +24,14 @@ public:
     std::string getcomplement () const {return complement;}
     std::string gettown () const {return town;}
     
-private:
-    void asgoodformat ();
+    void setpostalcode (unsigned int);
+    void setcomplement (std::string);
+    void settown (std::string);
     
-    unsigned short number;
+private:
+    void libelleasgoodformat ();
+    
+    unsigned short number; //changer en string et utiliser regex pour ajouter les bis/A/B/...?
     std::string street;
     std::string complement;
     unsigned int postalcode;

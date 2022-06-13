@@ -11,6 +11,7 @@
 #include <stdio.h>
 #include <string>
 #include <iostream>
+
 #define NAME_MAX_SIZE 30
 
 enum class enumgender { F, M };
