@@ -31,7 +31,7 @@ public:
 private:
     void libelleasgoodformat ();
     
-    unsigned short number; //changer en string et utiliser regex pour ajouter les bis/A/B/...?
+    unsigned short number;
     std::string street;
     std::string complement;
     unsigned int postalcode;

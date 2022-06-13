@@ -46,6 +46,5 @@ private:
 };
 
 std::ostream& operator<< (std::ostream&, const contact&);
-bool strcontainnumber (std::string);
 
 #endif /* contact_hpp */

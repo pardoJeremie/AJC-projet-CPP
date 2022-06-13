@@ -10,6 +10,8 @@
 #include <cctype>
 #include "contact.hpp"
 
+bool strcontainnumber (std::string);
+
 unsigned int contact::idautoincrementation = 1;
 
 contact::contact (std::string firstname, std::string lastname, enumgender gender) {
@@ -68,6 +70,7 @@ std::ostream& operator<< (std::ostream& os, const contact& objcontact) {
     os << objcontact.tostring();
     return os;
 }
+
 bool strcontainnumber (std::string s) {
-    return std::find_if(s.begin(), s.end(), ::isdigit) != s.end(); //utiliser regex?
+    return std::find_if(s.begin(), s.end(), ::isdigit) != s.end();
 }
