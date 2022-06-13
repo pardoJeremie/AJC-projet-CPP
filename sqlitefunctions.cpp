@@ -12,20 +12,21 @@
 #include <string>
 
 sqlite3* sqliteopen (std::string dbpath) {
-    sqlite3* db;
+    sqlite3* db = nullptr;
     if (sqlite3_open(dbpath.c_str(), &db) != SQLITE_OK) {
-        std::cout << "ERREUR during opening of the db : " << sqlite3_errmsg(db) << std::endl;
-        return nullptr;
+        std::string errmsg = "ERREUR during the opening of the db : ";
+        errmsg.append(sqlite3_errmsg(db));
+        throw std::invalid_argument(errmsg);
     }
     return db;
 }
 
-bool sqliteclose (sqlite3* db) {
+void sqliteclose (sqlite3* db) {
     if (sqlite3_close(db) != SQLITE_OK) {
-       std::cout << "ERREUR during clossing of the db : " <<  sqlite3_errmsg(db) << std::endl;
-      return false;
+        std::string errmsg = "ERREUR during the clossing of the db : ";
+        errmsg.append(sqlite3_errmsg(db));
+        throw std::invalid_argument(errmsg);
    }
-    return true;
 }
 
 std::vector<contact*>  sqliteselect (sqlite3* db, std::string str) {
@@ -72,5 +73,13 @@ std::vector<contact*>  sqliteselect (sqlite3* db, std::string str) {
 
 void sqliteadd (sqlite3*, contact*) {}
 
-void sqlitedelete (sqlite3*, unsigned int) {}
+void sqlitedelete (sqlite3* db, unsigned int id) {
+    sqlite3_stmt *stmt;
+    std::string requet = "delete from contacts where idcontact = " +  std::to_string(id) + ";";
+    
+    sqlite3_prepare_v2(db,requet.c_str(),-1,&stmt, NULL);
+    sqlite3_step(stmt);
+    
+    sqlite3_finalize(stmt);
+}
 

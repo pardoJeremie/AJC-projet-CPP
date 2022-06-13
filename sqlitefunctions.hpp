@@ -15,7 +15,7 @@
 #include "contact.hpp"
 
 sqlite3* sqliteopen (std::string);
-bool sqliteclose (sqlite3*);
+void sqliteclose (sqlite3*);
 std::vector<contact*> sqliteselect (sqlite3*, std::string = "");
 void sqliteadd (sqlite3*, contact*);
 void sqlitedelete (sqlite3*, unsigned int);
