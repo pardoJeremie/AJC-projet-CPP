@@ -38,10 +38,10 @@ std::string contact::tostringid () {
 
 void contact::setfirstname (std::string firstname) {
     if (firstname.size() > NAME_MAX_SIZE)
-        throw std::invalid_argument("first name is to large");
+        throw std::invalid_argument("invalid argument in contact creation: first name is to large");
     
     if (strcontainnumber(firstname))
-        throw std::invalid_argument("first name contain numerical");
+        throw std::invalid_argument("invalid argument in contact creation: first name contain numerical");
     
     firstname.at(0) = toupper(firstname.at(0));
     
@@ -53,10 +53,10 @@ void contact::setfirstname (std::string firstname) {
 
 void contact::setlastname (std::string lastname) {
     if (lastname.size() > NAME_MAX_SIZE)
-        throw std::invalid_argument("last name is to large");
+        throw std::invalid_argument("invalid argument in contact creation: last name is too large");
     
     if (strcontainnumber(lastname))
-        throw std::invalid_argument("last name contain numerical");
+        throw std::invalid_argument("invalid argument in contact creation: last name contain numerical");
     
     for ( std::string::iterator it=lastname.begin(); it!=lastname.end(); ++it)
         *it = toupper(*it);

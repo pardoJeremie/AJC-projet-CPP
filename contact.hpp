@@ -42,4 +42,5 @@ private:
 };
 
 bool strcontainnumber (std::string);
+
 #endif /* contact_hpp */
