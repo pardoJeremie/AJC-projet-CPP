@@ -6,11 +6,12 @@
 //
 
 #include <iostream>
-#include <sqlite3.h>
+//#include <sqlite3.h>
+#include "contact.hpp"
 
 int main(int argc, const char * argv[]) {
     
-    std::cout << "sqlite3 version " << sqlite3_libversion() << std::endl;
+    //std::cout << "sqlite3 version " << sqlite3_libversion() << std::endl;
     
     return 0;
 }
