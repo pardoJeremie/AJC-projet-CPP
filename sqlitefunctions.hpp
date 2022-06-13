@@ -11,11 +11,12 @@
 #include <stdio.h>
 #include <sqlite3.h>
 #include <iostream>
+#include <vector>
 #include "contact.hpp"
 
 sqlite3* sqliteopen (std::string);
 bool sqliteclose (sqlite3*);
-void sqliteselect (sqlite3*, std::string);
+std::vector<contact*> sqliteselect (sqlite3*, std::string = "");
 void sqliteadd (sqlite3*, contact*);
 void sqlitedelete (sqlite3*, unsigned int);
 

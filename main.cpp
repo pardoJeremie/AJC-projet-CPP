@@ -6,6 +6,7 @@
 //
 
 #include <iostream>
+#include <vector>
 #include "contact.hpp"
 #include "privatecontact.hpp"
 #include "professionalcontact.hpp"
@@ -19,7 +20,13 @@ int main(int argc, const char * argv[]) {
     if (db == nullptr)
         return -1;
 
-    sqliteselect(db,"where entreprise is not null");
+    std::vector<contact*> contacts = sqliteselect(db,"where ville = \"LA DEFENSE\"" );
+    
+    for(auto& el : contacts)
+        if (el != nullptr) {
+            std::cout << *el;
+            delete el;
+        }
     
     sqliteclose(db);
     

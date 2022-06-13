@@ -43,11 +43,12 @@ void contact::setfirstname (std::string firstname) {
     if (strcontainnumber(firstname))
         throw std::invalid_argument("invalid argument in contact creation: first name contain numerical!");
     
-    firstname.at(0) = toupper(firstname.at(0));
-    
-    for ( std::string::iterator it=firstname.begin()+1; it!=firstname.end(); ++it)
-        *it = tolower(*it);
-    
+    if (firstname.size() > 0) {
+        firstname.at(0) = toupper(firstname.at(0));
+        for ( std::string::iterator it=firstname.begin()+1; it!=firstname.end(); ++it)
+            *it = tolower(*it);
+    }
+
     this->firstname = firstname;
 }
 
