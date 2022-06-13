@@ -13,11 +13,11 @@
 #include "address.hpp"
 
 #define COMPANY_NAME_MAX_SIZE 50
-#define EMAIL_MAX_SIZE 50
+#define EMAIL_MAX_SIZE 250
 
 class professionalcontact : public contact {
 public:
-    professionalcontact (/*contact*/std::string, std::string, enumgender,/*add*/ address*,/*private*/ std::string, std::string);
+    professionalcontact (/*contact*/ unsigned int, std::string, std::string, enumgender,/*add*/ address*,/*private*/ std::string, std::string);
     ~professionalcontact ();
     
     std::string tostring() const override;

@@ -16,7 +16,7 @@
 
 class privatecontact : public contact {
 public:
-    privatecontact (/*contact*/std::string, std::string, enumgender,/*add*/ address*,/*date*/ date*);
+    privatecontact (/*contact*/ unsigned int, std::string, std::string, enumgender,/*add*/ address*,/*date*/ date*);
     ~privatecontact ();
     
     std::string tostring() const override;

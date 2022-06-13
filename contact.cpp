@@ -12,13 +12,11 @@
 
 bool strcontainnumber (std::string);
 
-unsigned int contact::idautoincrementation = 1;
-
-contact::contact (std::string firstname, std::string lastname, enumgender gender) {
+contact::contact (unsigned int id, std::string firstname, std::string lastname, enumgender gender) {
+    this->id = id;
     setfirstname(firstname);
     setlastname(lastname);
     this->gender = gender;
-    id = idautoincrementation++;
 }
 
 std::string contact::tostringwho () const {

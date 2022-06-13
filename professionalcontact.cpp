@@ -10,7 +10,7 @@
 #include "professionalcontact.hpp"
 
 
-professionalcontact::professionalcontact (/*constact*/ std::string firstname, std::string lastname, enumgender gender,/*add*/ address* addcompany,/*private*/ std::string companyname, std::string email) : contact (firstname, lastname, gender) {
+professionalcontact::professionalcontact (/*constact*/ unsigned int id, std::string firstname, std::string lastname, enumgender gender,/*add*/ address* addcompany,/*private*/ std::string companyname, std::string email) : contact (id, firstname, lastname, gender) {
     setcompanyname (companyname);
     setemail (email);
     this->addcompany = addcompany;

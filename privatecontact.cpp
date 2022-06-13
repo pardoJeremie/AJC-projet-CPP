@@ -8,7 +8,7 @@
 #include <sstream>
 #include "privatecontact.hpp"
 
-privatecontact::privatecontact (/*constact*/ std::string firstname, std::string lastname, enumgender gender,/*add*/ address* addpostal,/*date*/ date* birthdate) : contact (firstname, lastname, gender) {
+privatecontact::privatecontact (/*constact*/ unsigned int id, std::string firstname, std::string lastname, enumgender gender,/*add*/ address* addpostal,/*date*/ date* birthdate) : contact (id, firstname, lastname, gender) {
     this->addpostal = addpostal;
     this->birthdate = birthdate;
 }

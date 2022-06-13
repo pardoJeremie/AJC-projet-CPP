@@ -5,8 +5,8 @@
 //  Created by pardo jérémie on 13/06/2022.
 //
 
-#include "date.hpp"
 #include <iostream>
+#include "date.hpp"
 
 date::date (unsigned short day, unsigned short month, unsigned short year) {
     this->day = day;

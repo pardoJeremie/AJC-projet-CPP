@@ -18,7 +18,7 @@ enum class enumgender { F, M };
 
 class contact {
 public:
-    contact (std::string, std::string, enumgender);
+    contact (unsigned int, std::string, std::string, enumgender);
     virtual ~contact () {};
     
     
@@ -35,14 +35,12 @@ public:
     void setlastname (std::string);
     
     enumgender getgender () const {return gender;}
-    
-    static void setidautoincrementation (unsigned int idinitial) {idautoincrementation = idinitial;}
+
 private:
     unsigned int id;
     std::string firstname;
     std::string lastname;
     enumgender gender;
-    static unsigned int idautoincrementation;
 };
 
 std::ostream& operator<< (std::ostream&, const contact&);
