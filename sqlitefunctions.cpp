@@ -29,6 +29,7 @@ void sqliteclose (sqlite3* db) {
    }
 }
 
+
 std::vector<contact*>  sqliteselect (sqlite3* db, std::string str) {
     sqlite3_stmt *stmt;
     std::string requet = "select * from contacts " + str + ";";
@@ -71,7 +72,15 @@ std::vector<contact*>  sqliteselect (sqlite3* db, std::string str) {
     return contacts;
 }
 
-void sqliteadd (sqlite3*, contact*) {}
+void sqliteadd (sqlite3* db, contact* pcontact) {
+    sqlite3_stmt *stmt;
+    std::string requet = "insert into contacts \" + + \" ;";
+    
+    sqlite3_prepare_v2(db,requet.c_str(),-1,&stmt, NULL);
+    sqlite3_step(stmt);
+    
+    sqlite3_finalize(stmt);
+}
 
 void sqlitedelete (sqlite3* db, unsigned int id) {
     sqlite3_stmt *stmt;

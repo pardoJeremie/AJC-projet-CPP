@@ -21,7 +21,12 @@ privatecontact::~privatecontact () {
 
 std::string privatecontact::tostring() const {
     std::ostringstream oss;
-    oss << "Particulier : " << tostringid() << "\n\n\t" << tostringwho() << "\n\t" << addpostal->tostringlibelle() << "\n\t" << addpostal->tostringpostalcode() << " " << addpostal->gettown() << "\n\tAge : " << birthdate->getage() << " ans";
+    
+    std::string complement = addpostal->getcomplement();
+    if (complement != "")
+        complement = " • "+complement;
+    
+    oss << "Particulier : " << tostringid() << "\n\n\t" << tostringwho() << "\n\t" << addpostal->tostringlibelle() << complement << "\n\t" << addpostal->tostringpostalcode() << " " << addpostal->gettown() << "\n\tAge : " << birthdate->getage() << " ans";
     if(birthdate->isbirthday())
         oss << " et Bon Anniversaire !";
     oss << "\n\n";
