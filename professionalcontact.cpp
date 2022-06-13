@@ -23,7 +23,7 @@ professionalcontact::~professionalcontact () {
 
 std::string professionalcontact::tostring() const {
     std::ostringstream oss;
-    oss << "Professionnel : " << tostringid() << "\n\n\tSociété : "<< companyname << "\n\tContact : " << tostringwho() << "\n\t" << addcompany->tostringlibelle() << "\n\t" << addcompany->tostringpostalcode() << " " << addcompany->gettown() << "\n\n\tMail : " << email << "\n\n" ;
+    oss << "Professionnel : " << tostringid() << "\n\n\tSociété : "<< companyname << "\n\tContact : " << tostringwho() << "\n\t" << addcompany->tostringlibelle() << "\n\t" << addcompany->tostringpostalcode() << " " << addcompany->gettown() << "\n\tMail : " << email << "\n\n" ;
     return oss.str();
 }
 

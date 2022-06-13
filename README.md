@@ -81,23 +81,22 @@ A la fin du projet, vous mettrez dans la section Travaux:
 
 *ANNEXE*
 
+
+Contraintes d’Affichage :
+- Numéro sur 5 chiffres obligatoires
+- Nom en Majuscules
+- Prénom : 1ère lettre en Majuscule, les autres minuscules
+- Ville en Majuscules
+
 *EXEMPLE DE LISTING DES CLIENTS :
 
-	Particulier : 00001
+Particulier : 00001
 	M. BETY Daniel
 	12, rue des Oliviers
 	94000 CRETEIL
-	Situation Familiale : Célibataire 
 	age : 25 ans et Bon Anniversaire !
-	Professionnel : 00004
 
-Contraintes d’Affichage :
-	▪ Numéro sur 5 chiffres obligatoires
-	▪ Nom en Majuscules
-	▪ Prénom : 1ère lettre en Majuscule, les autres minuscules
-	▪ Ville en Majuscules
-	
-...
+Professionnel : 00004
 	Société PAUL
 	Contact : Mme JOAU Jeanne 36, quai des Orfèvres
 	93500 ROISSY EN FRANCE
