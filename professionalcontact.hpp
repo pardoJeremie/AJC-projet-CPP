@@ -21,10 +21,10 @@ public:
     ~professionalcontact ();
     
     std::string tostring() const override;
-    std::string getlibelle() const {return addpostal->tostringlibelle();}
-    std::string getpostalcode() const {return addpostal->tostringpostalcode();}
-    std::string getcomplement() const {return addpostal->getcomplement();}
-    std::string gettown() const {return addpostal->gettown();}
+    std::string getlibelle() const {return addcompany->tostringlibelle();}
+    std::string getpostalcode() const {return addcompany->tostringpostalcode();}
+    std::string getcomplement() const {return addcompany->getcomplement();}
+    std::string gettown() const {return addcompany->gettown();}
     
     void setcompanyname (std::string);
     void setemail (std::string);
@@ -32,7 +32,7 @@ public:
 private:
     
     std::string companyname;
-    address* addpostal = nullptr;
+    address* addcompany = nullptr;
     std::string email;
 };
 

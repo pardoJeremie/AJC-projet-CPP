@@ -10,20 +10,20 @@
 #include "professionalcontact.hpp"
 
 
-professionalcontact::professionalcontact (/*constact*/ std::string firstname, std::string lastname, enumgender gender,/*add*/ address* addpostal,/*private*/ std::string companyname, std::string email) : contact (firstname, lastname, gender) {
+professionalcontact::professionalcontact (/*constact*/ std::string firstname, std::string lastname, enumgender gender,/*add*/ address* addcompany,/*private*/ std::string companyname, std::string email) : contact (firstname, lastname, gender) {
     setcompanyname (companyname);
     setemail (email);
-    this->addpostal = addpostal;
+    this->addcompany = addcompany;
 }
 
 professionalcontact::~professionalcontact () {
-    if (addpostal != nullptr)
-        delete addpostal;
+    if (addcompany != nullptr)
+        delete addcompany;
 }
 
 std::string professionalcontact::tostring() const {
     std::ostringstream oss;
-    oss << "Professionnel : " << tostringid() << "\n\n\tSociété : "<< companyname << "\n\tContact : " << tostringwho() << "\n\t" << addpostal->tostringlibelle() << "\n\t" << addpostal->tostringpostalcode() << " " << addpostal->gettown() << "\n\n\tMail : " << email << "\n\n" ;
+    oss << "Professionnel : " << tostringid() << "\n\n\tSociété : "<< companyname << "\n\tContact : " << tostringwho() << "\n\t" << addcompany->tostringlibelle() << "\n\t" << addcompany->tostringpostalcode() << " " << addcompany->gettown() << "\n\n\tMail : " << email << "\n\n" ;
     return oss.str();
 }
 
