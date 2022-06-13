@@ -19,7 +19,7 @@ contact::contact (std::string firstname, std::string lastname, enumgender gender
     id = idautoincrementation++;
 }
 
-std::string contact::tostringwho () {
+std::string contact::tostringwho () const {
     std::ostringstream oss;
     if (gender == enumgender::M)
         oss << "M";
@@ -29,7 +29,7 @@ std::string contact::tostringwho () {
     return oss.str();
 }
 
-std::string contact::tostringid () {
+std::string contact::tostringid () const {
     std::ostringstream oss;
     oss << std::setw(5) << std::setfill('0') << id;
     return oss.str();
@@ -38,10 +38,10 @@ std::string contact::tostringid () {
 
 void contact::setfirstname (std::string firstname) {
     if (firstname.size() > NAME_MAX_SIZE)
-        throw std::invalid_argument("invalid argument in contact creation: first name is to large");
+        throw std::invalid_argument("invalid argument in contact creation: first name is to large!");
     
     if (strcontainnumber(firstname))
-        throw std::invalid_argument("invalid argument in contact creation: first name contain numerical");
+        throw std::invalid_argument("invalid argument in contact creation: first name contain numerical!");
     
     firstname.at(0) = toupper(firstname.at(0));
     
@@ -53,14 +53,19 @@ void contact::setfirstname (std::string firstname) {
 
 void contact::setlastname (std::string lastname) {
     if (lastname.size() > NAME_MAX_SIZE)
-        throw std::invalid_argument("invalid argument in contact creation: last name is too large");
+        throw std::invalid_argument("invalid argument in contact creation: last name is too large!");
     
     if (strcontainnumber(lastname))
-        throw std::invalid_argument("invalid argument in contact creation: last name contain numerical");
+        throw std::invalid_argument("invalid argument in contact creation: last name contain numerical!");
     
     for ( std::string::iterator it=lastname.begin(); it!=lastname.end(); ++it)
         *it = toupper(*it);
     this->lastname = lastname;
 }
 
+
+std::ostream& operator<< (std::ostream& os, const contact& objcontact) {
+    os << objcontact.tostring();
+    return os;
+}
 bool strcontainnumber (std::string s) {return std::find_if(s.begin(), s.end(), ::isdigit) != s.end();}

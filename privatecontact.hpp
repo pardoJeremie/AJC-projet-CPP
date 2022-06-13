@@ -16,17 +16,15 @@
 
 class privatecontact : public contact {
 public:
-    privatecontact (/*contact*/std::string, std::string, enumgender, /*add*/ unsigned short, std::string, std::string ,unsigned int ,std::string,/*date*/unsigned short, unsigned short, unsigned short);
-    ~privatecontact () {
-        
-    }
+    privatecontact (/*contact*/std::string, std::string, enumgender,/*add*/ address*,/*date*/ date*);
+    ~privatecontact ();
     
-    std::string tostring();
-    std::string getbirthdate() {return birthdate.tostring();}
-    std::string getlibelle() {return addpostal.tostringlibelle();}
-    std::string getpostalcode() {return addpostal.tostringpostalcode();}
-    std::string getcomplement() {return addpostal.getcomplement();}
-    std::string gettown() {return addpostal.gettown();}
+    std::string tostring() const override;
+    std::string getbirthdate() const {return birthdate->tostring();}
+    std::string getlibelle() const {return addpostal->tostringlibelle();}
+    std::string getpostalcode() const {return addpostal->tostringpostalcode();}
+    std::string getcomplement() const {return addpostal->getcomplement();}
+    std::string gettown() const {return addpostal->gettown();}
     
 private:
     address* addpostal = nullptr;

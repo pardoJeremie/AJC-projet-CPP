@@ -10,6 +10,7 @@
 
 #include <stdio.h>
 #include <string>
+#include <iostream>
 #define NAME_MAX_SIZE 30
 
 enum class enumgender { F, M };
@@ -17,20 +18,22 @@ enum class enumgender { F, M };
 class contact {
 public:
     contact (std::string, std::string, enumgender);
-    ~contact () {}
+    virtual ~contact () {};
     
-    std::string tostringwho ();
-    std::string tostringid ();
     
-    unsigned int getid () {return id;}
+    virtual std::string tostring() const = 0;
+    std::string tostringwho () const;
+    std::string tostringid () const;
     
-    std::string getfirstname () {return firstname;}
+    unsigned int getid () const {return id;}
+    
+    std::string getfirstname () const {return firstname;}
     void setfirstname (std::string);
     
-    std::string getlastname () {return lastname;}
+    std::string getlastname () const {return lastname;}
     void setlastname (std::string);
     
-    enumgender getgender () {return gender;}
+    enumgender getgender () const {return gender;}
     
     static void setidautoincrementation (unsigned int idinitial) {idautoincrementation = idinitial;}
 private:
@@ -41,6 +44,7 @@ private:
     static unsigned int idautoincrementation;
 };
 
+std::ostream& operator<< (std::ostream&, const contact&);
 bool strcontainnumber (std::string);
 
 #endif /* contact_hpp */

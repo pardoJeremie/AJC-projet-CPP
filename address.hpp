@@ -19,10 +19,10 @@ public:
     address (unsigned short, std::string, std::string ,unsigned int ,std::string);
     ~address () {}
 
-    std::string tostringlibelle();
-    std::string tostringpostalcode();
-    std::string getcomplement() {return complement;}
-    std::string gettown() {return town;}
+    std::string tostringlibelle () const;
+    std::string tostringpostalcode () const;
+    std::string getcomplement () const {return complement;}
+    std::string gettown () const {return town;}
     
 private:
     void asgoodformat ();

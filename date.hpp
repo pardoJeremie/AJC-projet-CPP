@@ -19,8 +19,8 @@ public:
     ~date () {}
     
     bool isbirthday ();
-    unsigned short getage ();
-    std::string tostring ();
+    unsigned short getage () const;
+    std::string tostring () const;
 private:
     void asgoodformat ();
     bool asgooddayformat ();

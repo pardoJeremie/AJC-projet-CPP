@@ -22,7 +22,7 @@ bool date::isbirthday () {
     
     return day == now->tm_mday &&  month == (now->tm_mon + 1);
 }
-unsigned short date::getage () {
+unsigned short date::getage () const {
     std::time_t t = std::time(0);
     std::tm* now = std::localtime(&t);
     
@@ -33,7 +33,7 @@ unsigned short date::getage () {
     
     return age;
 }
-std::string date::tostring () {
+std::string date::tostring () const {
     std::ostringstream oss;
     oss << std::setw(2) << std::setfill('0') << day << "/" << std::setw(2) <<  std::setfill('0')  << month << "/" << year;
     return oss.str();
@@ -44,11 +44,11 @@ void date::asgoodformat() { // between 1/1/1900 and today.
     std::tm* now = std::localtime(&t);
     
     if (year < 1900 || year > (now->tm_year + 1900))
-        throw std::invalid_argument("invalid argument in date creation: year format is invalide");
+        throw std::invalid_argument("invalid argument in date creation: year format is invalide!");
     if (month > 12 || ( year == now->tm_year + 1900 && month > now->tm_mon + 1))
-        throw std::invalid_argument("invalid argument in date creation: month format is invalide");
+        throw std::invalid_argument("invalid argument in date creation: month format is invalide!");
     if (!asgooddayformat () || ( year == now->tm_year + 1900 && month == now->tm_mon + 1 && day > now->tm_mday))
-        throw std::invalid_argument("invalid argument in date creation: day format is invalide");
+        throw std::invalid_argument("invalid argument in date creation: day format is invalide!");
 }
 
 
