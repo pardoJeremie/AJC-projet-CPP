@@ -12,6 +12,7 @@
 #include "date.hpp"
 #include "privatecontact.hpp"
 #include "professionalcontact.hpp"
+#include "sqlitefunctions.hpp"
 
 void submenuselectall (sqlite3*);
 void submenuselectprivate (sqlite3*);

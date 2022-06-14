@@ -10,12 +10,7 @@
 
 #include <stdio.h>
 #include <vector>
-#include "sqlitefunctions.hpp"
-#include "contact.hpp"
-#include "privatecontact.hpp"
-#include "professionalcontact.hpp"
-#include "address.hpp"
-#include "date.hpp"
+#include <sqlite3.h>
 
 void mainmenu (sqlite3*);
 
