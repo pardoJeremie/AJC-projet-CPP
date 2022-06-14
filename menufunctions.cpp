@@ -8,6 +8,10 @@
 #include <vector>
 #include "menufunctions.hpp"
 #include "contact.hpp"
+#include "address.hpp"
+#include "date.hpp"
+#include "privatecontact.hpp"
+#include "professionalcontact.hpp"
 
 void submenuselectall (sqlite3*);
 void submenuselectprivate (sqlite3*);
@@ -23,12 +27,15 @@ bool quitmenu ();
 
 void printresult(std::vector<contact*>);
 
+privatecontact* subsubmenucreationprivatecontact ();
+professionalcontact* subsubmenucreationprofessionalcontact ();
+
 
 void mainmenu (sqlite3* db) {
     bool stoploop = false;
     int selection;
     while (!stoploop) {
-        std::cout << "MENU DE SELECTION:\n\t1. Lister les contacts privés et professionels \n\t2. Lister les contacts privés \n\t3. Lister les contacts professionels \n\t4. Lister les contacts par nom\n\t5. Lister les contacts par ville\n\t6. Ajouter un contact\n\t7. Supprimer un Contact via son identifiant\n\t8. Quitter\n\t\tvotre choix: ";
+        std::cout << "MENU DE SELECTION:\n\t1. Lister les contacts privés et professionnels \n\t2. Lister les contacts privés \n\t3. Lister les contacts professionnels \n\t4. Lister les contacts par nom\n\t5. Lister les contacts par ville\n\t6. Ajouter un contact\n\t7. Supprimer un Contact via son identifiant\n\t8. Quitter\n\t\tvotre choix: ";
         std::cin >> selection;
         if(!std::cin.good()) {
             std::cin.clear();
@@ -104,9 +111,20 @@ void submenuselectbytown (sqlite3* db) {
 
 void submenuadd (sqlite3* db) {
     try {
+        char c;
+        std::cout << "\tVoulez-vous ajouter un contact privé? [O/N] ";
+        std::cin >> c;
+        if(c == 'O' || c == 'o')
+            sqliteadd (db, subsubmenucreationprivatecontact());
+        else {
+            std::cout << "\tVous ajoutez un contact professionnel.\n";
+            sqliteadd (db, subsubmenucreationprofessionalcontact());
+        }
+        std::cout << "\tContact ajouté!\n";
     } catch (std::invalid_argument  exp) {
         std::cout << exp.what() << std::endl;
     }
+    std::cout << std::endl;
 }
 void submenudelete (sqlite3* db) {
     unsigned int id;
@@ -141,31 +159,13 @@ void printresult(std::vector<contact*> contacts) {
     std::cout << "--------------------------\n\n";
 }
 
-/*
-contact* a = nullptr;
-contact* b = nullptr;
-try {
-    a = new privatecontact (102,"roberts","bartholomew", enumgender::M, new address (13,"rue des moignons","",97018,"pirate town"), new date (13,6,2000));
-}catch ( std::invalid_argument exp) {
-    std::cout << "Errer in init private contact:\n  " << exp.what() << std::endl;
-    delete a;
-    a = nullptr;
+privatecontact* subsubmenucreationprivatecontact () {
+    privatecontact* pprivatecontact = nullptr;
+    pprivatecontact = new privatecontact (102,"roberts","bartholomew", enumgender::M, new address (13,"rue des moignons","",97018,"pirate town"), new date (40,6,2000));
+    return pprivatecontact;
 }
-try {
-b = new professionalcontact (2890,"jorge","Grotadmorv", enumgender::M, new address (2,"rue des poubelles","",17120,"ordure ville"),"Le Roy du recyclage","jorge.Gotadmorv.192@gmail.com");
-}catch ( std::invalid_argument exp) {
-    std::cout << "Errer in init professional contact:\n  " << exp.what() << std::endl;
-    delete b;
-    b = nullptr;
+professionalcontact* subsubmenucreationprofessionalcontact (){
+    professionalcontact* pprofessionalcontact = nullptr;
+    pprofessionalcontact = new professionalcontact (2890,"jorge","Grotadmorv", enumgender::M, new address (2,"rue des poubelles","",17120,"ordure ville"),"Le Roy du recyclage","jorge.Gotadmorv.192@gmail.com");
+    return pprofessionalcontact;
 }
-
-if (a != nullptr) {
-    sqliteadd(db, a);
-    delete a;
-}
-
-if (b != nullptr) {
-    sqliteadd(db, b);
-    delete b;
-}
-*/
