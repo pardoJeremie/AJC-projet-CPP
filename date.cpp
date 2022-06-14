@@ -39,6 +39,12 @@ std::string date::tostring () const {
     return oss.str();
 }
 
+std::string date::tostringsql () const {
+    std::ostringstream oss;
+    oss << year << "-" << std::setw(2) <<  std::setfill('0')  << month << "-" << std::setw(2) << std::setfill('0') << day;
+    return oss.str();
+}
+
 void date::asgoodformat() { // between 1/1/1900 and today.
     std::time_t t = std::time(0);
     std::tm* now = std::localtime(&t);

@@ -21,11 +21,7 @@ contact::contact (unsigned int id, std::string firstname, std::string lastname, 
 
 std::string contact::tostringwho () const {
     std::ostringstream oss;
-    if (gender == enumgender::M)
-        oss << "M";
-    else
-        oss << "F";
-    oss << ". " << lastname << " " << firstname;
+    oss << tostringgender() << ". " << lastname << " " << firstname;
     return oss.str();
 }
 
@@ -35,6 +31,11 @@ std::string contact::tostringid () const {
     return oss.str();
 }
 
+std::string contact::tostringgender () const {
+    if (gender == enumgender::M)
+        return "M";
+    return "F";
+}
 
 void contact::setfirstname (std::string firstname) {
     if (firstname.size() > NAME_MAX_SIZE)

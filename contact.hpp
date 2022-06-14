@@ -25,6 +25,7 @@ public:
     virtual std::string tostring() const = 0;
     std::string tostringwho () const;
     std::string tostringid () const;
+    std::string tostringgender () const;
     
     unsigned int getid () const {return id;}
     

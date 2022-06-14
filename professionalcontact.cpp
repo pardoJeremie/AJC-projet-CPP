@@ -35,6 +35,8 @@ std::string professionalcontact::tostring() const {
 void professionalcontact::setcompanyname (std::string companyname) {
     if (companyname.size() > COMPANY_NAME_MAX_SIZE)
             throw std::invalid_argument("invalid argument in professional contact creation: company name is too large!");
+    for ( std::string::iterator it=companyname.begin(); it!=companyname.end(); ++it)
+        *it = toupper(*it);
     this->companyname = companyname;
 }
 void professionalcontact::setemail (std::string email ) {
