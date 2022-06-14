@@ -10,8 +10,9 @@
 
 #include <stdio.h>
 #include <string>
-#define LIBELLE_MAX_SIZE 50
-#define COMPLEMENT_MAX_SIZE 50
+
+#define LIBELLE_MAX_SIZE 250
+#define COMPLEMENT_MAX_SIZE 250
 #define TOWN_MAX_SIZE 50
 
 class address {

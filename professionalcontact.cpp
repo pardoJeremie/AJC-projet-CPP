@@ -10,7 +10,7 @@
 #include "professionalcontact.hpp"
 
 
-professionalcontact::professionalcontact (/*constact*/ std::string firstname, std::string lastname, enumgender gender,/*add*/ address* addcompany,/*private*/ std::string companyname, std::string email) : contact (firstname, lastname, gender) {
+professionalcontact::professionalcontact (/*constact*/ unsigned int id, std::string firstname, std::string lastname, enumgender gender,/*add*/ address* addcompany,/*private*/ std::string companyname, std::string email) : contact (id, firstname, lastname, gender) {
     setcompanyname (companyname);
     setemail (email);
     this->addcompany = addcompany;
@@ -23,13 +23,20 @@ professionalcontact::~professionalcontact () {
 
 std::string professionalcontact::tostring() const {
     std::ostringstream oss;
-    oss << "Professionnel : " << tostringid() << "\n\n\tSociété : "<< companyname << "\n\tContact : " << tostringwho() << "\n\t" << addcompany->tostringlibelle() << "\n\t" << addcompany->tostringpostalcode() << " " << addcompany->gettown() << "\n\tMail : " << email << "\n\n" ;
+    
+    std::string complement = addcompany->getcomplement();
+    if (complement != "")
+        complement = " • "+ complement;
+    
+    oss << "Professionnel : " << tostringid() << "\n\n\tSociété : "<< companyname << "\n\tContact : " << tostringwho() << "\n\t" << addcompany->tostringlibelle() << complement << "\n\t" << addcompany->tostringpostalcode() << " " << addcompany->gettown() << "\n\tMail : " << email << "\n\n" ;
     return oss.str();
 }
 
 void professionalcontact::setcompanyname (std::string companyname) {
     if (companyname.size() > COMPANY_NAME_MAX_SIZE)
             throw std::invalid_argument("invalid argument in professional contact creation: company name is too large!");
+    for ( std::string::iterator it=companyname.begin(); it!=companyname.end(); ++it)
+        *it = toupper(*it);
     this->companyname = companyname;
 }
 void professionalcontact::setemail (std::string email ) {

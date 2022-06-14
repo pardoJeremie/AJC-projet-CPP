@@ -21,6 +21,7 @@ public:
     bool isbirthday ();
     unsigned short getage () const;
     std::string tostring () const;
+    std::string tostringsql () const;
 private:
     void asgoodformat ();
     bool asgooddayformat ();

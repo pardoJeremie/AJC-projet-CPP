@@ -8,7 +8,7 @@
 #include <sstream>
 #include "privatecontact.hpp"
 
-privatecontact::privatecontact (/*constact*/ std::string firstname, std::string lastname, enumgender gender,/*add*/ address* addpostal,/*date*/ date* birthdate) : contact (firstname, lastname, gender) {
+privatecontact::privatecontact (/*constact*/ unsigned int id, std::string firstname, std::string lastname, enumgender gender,/*add*/ address* addpostal,/*date*/ date* birthdate) : contact (id, firstname, lastname, gender) {
     this->addpostal = addpostal;
     this->birthdate = birthdate;
 }
@@ -21,7 +21,12 @@ privatecontact::~privatecontact () {
 
 std::string privatecontact::tostring() const {
     std::ostringstream oss;
-    oss << "Particulier : " << tostringid() << "\n\n\t" << tostringwho() << "\n\t" << addpostal->tostringlibelle() << "\n\t" << addpostal->tostringpostalcode() << " " << addpostal->gettown() << "\n\tAge : " << birthdate->getage() << " ans";
+    
+    std::string complement = addpostal->getcomplement();
+    if (complement != "")
+        complement = " • "+complement;
+    
+    oss << "Particulier : " << tostringid() << "\n\n\t" << tostringwho() << "\n\t" << addpostal->tostringlibelle() << complement << "\n\t" << addpostal->tostringpostalcode() << " " << addpostal->gettown() << "\n\tAge : " << birthdate->getage() << " ans";
     if(birthdate->isbirthday())
         oss << " et Bon Anniversaire !";
     oss << "\n\n";

@@ -7,8 +7,8 @@
 
 #include <sstream>
 #include <iomanip>
-#include "address.hpp"
 #include <iostream>
+#include "address.hpp"
 
 address::address (unsigned short number, std::string street, std::string complement, unsigned int postalcode, std::string town) {
     this->number = number;

@@ -5,8 +5,8 @@
 //  Created by pardo jérémie on 13/06/2022.
 //
 
-#include "date.hpp"
 #include <iostream>
+#include "date.hpp"
 
 date::date (unsigned short day, unsigned short month, unsigned short year) {
     this->day = day;
@@ -36,6 +36,12 @@ unsigned short date::getage () const {
 std::string date::tostring () const {
     std::ostringstream oss;
     oss << std::setw(2) << std::setfill('0') << day << "/" << std::setw(2) <<  std::setfill('0')  << month << "/" << year;
+    return oss.str();
+}
+
+std::string date::tostringsql () const {
+    std::ostringstream oss;
+    oss << year << "-" << std::setw(2) <<  std::setfill('0')  << month << "-" << std::setw(2) << std::setfill('0') << day;
     return oss.str();
 }
 
