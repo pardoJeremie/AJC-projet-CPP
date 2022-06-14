@@ -38,6 +38,9 @@ std::string contact::tostringgender () const {
 }
 
 void contact::setfirstname (std::string firstname) {
+    if (firstname == "")
+        throw std::invalid_argument("invalid argument in contact creation: first name cannot be empty!");
+    
     if (firstname.size() > NAME_MAX_SIZE)
         throw std::invalid_argument("invalid argument in contact creation: first name is to large!");
     
@@ -54,6 +57,9 @@ void contact::setfirstname (std::string firstname) {
 }
 
 void contact::setlastname (std::string lastname) {
+    if (lastname == "")
+        throw std::invalid_argument("invalid argument in contact creation: last name cannot be empty!");
+    
     if (lastname.size() > NAME_MAX_SIZE)
         throw std::invalid_argument("invalid argument in contact creation: last name is too large!");
     

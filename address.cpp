@@ -12,7 +12,7 @@
 
 address::address (unsigned int number, std::string street, std::string complement, unsigned int postalcode, std::string town) {
     this->number = number;
-    this->street = street;
+    setstreet(street);
     libelleasgoodformat ();
     
     setpostalcode (postalcode);
@@ -33,6 +33,12 @@ std::string address::tostringpostalcode () const {
     return oss.str();
 }
 
+void address::setstreet (std::string street) {
+    if (street == "")
+        throw std::invalid_argument("invalid argument in contact creation: street cannot be empty");
+    this->street = street;
+}
+
 void address::setpostalcode (unsigned int postalcode ) {
     if (postalcode < 1000 || 98000 <= postalcode)
         throw std::invalid_argument("invalid argument in address creation: postal code is not a valide on!");
@@ -40,6 +46,9 @@ void address::setpostalcode (unsigned int postalcode ) {
 }
 
 void address::settown (std::string town) {
+    if (town == "")
+        throw std::invalid_argument("invalid argument in contact creation: town cannot be empty!");
+    
     if (town .size() > TOWN_MAX_SIZE)
         throw std::invalid_argument("invalid argument in address creation: town is too large!");
     for ( std::string::iterator it=town.begin(); it!=town.end(); ++it)

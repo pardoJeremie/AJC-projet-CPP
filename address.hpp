@@ -27,6 +27,7 @@ public:
     std::string gettown () const {return town;}
 
 private:
+    void setstreet (std::string);
     void setpostalcode (unsigned int);
     void setcomplement (std::string);
     void settown (std::string);

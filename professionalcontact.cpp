@@ -33,6 +33,9 @@ std::string professionalcontact::tostring() const {
 }
 
 void professionalcontact::setcompanyname (std::string companyname) {
+    if (companyname == "")
+        throw std::invalid_argument("invalid argument in contact creation: company name cannot be empty!");
+    
     if (companyname.size() > COMPANY_NAME_MAX_SIZE)
             throw std::invalid_argument("invalid argument in professional contact creation: company name is too large!");
     for ( std::string::iterator it=companyname.begin(); it!=companyname.end(); ++it)

@@ -9,8 +9,8 @@
 #include "privatecontact.hpp"
 
 privatecontact::privatecontact (/*constact*/ unsigned int id, std::string firstname, std::string lastname, enumgender gender,/*add*/ address* addpostal,/*date*/ date* birthdate) : contact (id, firstname, lastname, gender) {
-        this->addpostal = addpostal;
-        this->birthdate = birthdate;
+    this->addpostal = addpostal;
+    this->birthdate = birthdate;
 }
 privatecontact::~privatecontact () {
     if (addpostal != nullptr)

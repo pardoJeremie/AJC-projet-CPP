@@ -44,5 +44,6 @@ private:
 };
 
 std::ostream& operator<< (std::ostream&, const contact&);
+void cannotbeempty (std::string, std::string);
 
 #endif /* contact_hpp */
