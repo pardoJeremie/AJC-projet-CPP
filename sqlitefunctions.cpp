@@ -5,11 +5,10 @@
 //  Created by pardo jérémie on 13/06/2022.
 //
 
-
+#include <string>
 #include "sqlitefunctions.hpp"
 #include "privatecontact.hpp"
 #include "professionalcontact.hpp"
-#include <string>
 
 sqlite3* sqliteopen (std::string dbpath) {
     sqlite3* db = nullptr;
@@ -83,7 +82,7 @@ void sqliteadd (sqlite3* db, contact* pcontact) {
         requet += ", dtnaissance";
         requetvalue += ", '" + pprivatecontact->tostringlibelle() + "', " + pprivatecontact->tostringpostalcode() + ", '" + pprivatecontact->gettown() + "', '" + pprivatecontact->tostringsqlbirthdate() + "'";
         
-        if (pprivatecontact->getcomplement() == "") {
+        if (pprivatecontact->getcomplement() != "") {
             requet += ", complement";
             requetvalue += ", '" + pprivatecontact->getcomplement() + "'";
         }

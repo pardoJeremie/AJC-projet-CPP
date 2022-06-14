@@ -20,7 +20,6 @@ public:
     ~privatecontact ();
     
     std::string tostring() const override;
-    std::string tostringbirthdate() const {return birthdate->tostring();}
     std::string tostringsqlbirthdate() const {return birthdate->tostringsql();}
     std::string tostringlibelle() const {return addpostal->tostringlibelle();}
     std::string tostringpostalcode() const {return addpostal->tostringpostalcode();}
@@ -28,6 +27,8 @@ public:
     std::string gettown() const {return addpostal->gettown();}
     
 private:
+    std::string tostringbirthdate() const {return birthdate->tostring();}
+    
     address* addpostal = nullptr;
     date* birthdate = nullptr;
 };
