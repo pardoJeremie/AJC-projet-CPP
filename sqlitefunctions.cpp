@@ -82,7 +82,7 @@ void sqliteadd (sqlite3* db, contact* pcontact) {
         requet += ", dtnaissance";
         requetvalue += ", '" + pprivatecontact->tostringlibelle() + "', " + pprivatecontact->tostringpostalcode() + ", '" + pprivatecontact->gettown() + "', '" + pprivatecontact->tostringsqlbirthdate() + "'";
         
-        if (pprivatecontact->getcomplement() == "") {
+        if (pprivatecontact->getcomplement() != "") {
             requet += ", complement";
             requetvalue += ", '" + pprivatecontact->getcomplement() + "'";
         }

@@ -18,7 +18,7 @@
 
 class address {
 public:
-    address (unsigned short, std::string, std::string ,unsigned int ,std::string);
+    address (unsigned int, std::string, std::string ,unsigned int ,std::string);
     ~address () {}
 
     std::string tostringlibelle () const;
@@ -33,7 +33,7 @@ private:
     
     void libelleasgoodformat ();
     
-    unsigned short number;
+    unsigned int number;
     std::string street;
     std::string complement;
     unsigned int postalcode;

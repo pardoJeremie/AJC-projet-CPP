@@ -35,13 +35,12 @@ void mainmenu (sqlite3* db) {
     bool stoploop = false;
     int selection;
     while (!stoploop) {
-        std::cout << "MENU DE SELECTION:\n\t1. Lister les contacts privés et professionnels \n\t2. Lister les contacts privés \n\t3. Lister les contacts professionnels \n\t4. Lister les contacts par nom\n\t5. Lister les contacts par ville\n\t6. Ajouter un contact\n\t7. Supprimer un Contact via son identifiant\n\t8. Quitter\n\t\tvotre choix: ";
+        std::cout << "MENU DE SELECTION:\n\t1. Lister les contacts privés et professionnels \n\t2. Lister les contacts privés \n\t3. Lister les contacts professionnels \n\t4. Lister les contacts par nom\n\t5. Lister les contacts par ville\n\t6. Ajouter un contact\n\t7. Supprimer un Contact via son identifiant\n\t8. Quitter\n\t\tVotre choix: ";
         std::cin >> selection;
-        if(!std::cin.good()) {
-            std::cin.clear();
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        if(!std::cin.good())
             selection = 0;
-        }
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         std::cout << std::endl;
         switch (selection) {
             case 1:
@@ -75,14 +74,17 @@ void mainmenu (sqlite3* db) {
     }
 }
 
+
 void submenuselectall (sqlite3* db) {
     std::vector<contact*> contacts = sqliteselect(db);
     printresult(contacts);
 }
+
 void submenuselectprivate (sqlite3* db) {
     std::vector<contact*> contacts = sqliteselect(db, "where entreprise is null");
     printresult(contacts);
 }
+
 void submenuselectprofessional (sqlite3* db) {
     std::vector<contact*> contacts = sqliteselect(db, "where entreprise is not null");
     printresult(contacts);
@@ -90,18 +92,19 @@ void submenuselectprofessional (sqlite3* db) {
 
 void submenuselectbylastname (sqlite3* db) {
     std::string str;
-    std::cout << "\tvotre choix de nom: ";
-    std::cin >> str;
+    std::cout << "\tVotre choix de nom: ";
+    getline(std::cin, str);
     std::cout << std::endl;
     for ( std::string::iterator it=str.begin(); it!=str.end(); ++it)
         *it = toupper(*it);
     std::vector<contact*> contacts = sqliteselect(db, "where nom = '"+ str +"'");
     printresult(contacts);
 }
+
 void submenuselectbytown (sqlite3* db) {
     std::string str;
-    std::cout << "\tvotre choix de ville: ";
-    std::cin >> str;
+    std::cout << "\tVotre choix de ville: ";
+    getline(std::cin, str);
     std::cout << std::endl;
     for ( std::string::iterator it=str.begin(); it!=str.end(); ++it)
         *it = toupper(*it);
@@ -109,12 +112,15 @@ void submenuselectbytown (sqlite3* db) {
     printresult(contacts);
 }
 
+
 void submenuadd (sqlite3* db) {
     contact* pcontact = nullptr;
     try {
         char c;
         std::cout << "\tVoulez-vous ajouter un contact privé? [O/N] ";
         std::cin >> c;
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         if(c == 'O' || c == 'o')
             pcontact = subsubmenucreationprivatecontact();
         else {
@@ -124,16 +130,17 @@ void submenuadd (sqlite3* db) {
         sqliteadd (db, pcontact);
         std::cout << "\tContact ajouté!\n";
         
-    } catch (std::invalid_argument  exp) {
+    } catch (std::invalid_argument exp) {
         std::cout << exp.what() << std::endl;
-        if (pcontact != nullptr)
-            delete pcontact;
     }
+    if (pcontact != nullptr)
+        delete pcontact;
     std::cout << std::endl;
 }
+
 void submenudelete (sqlite3* db) {
     unsigned int id;
-    std::cout << "\tvotre choix d'identifiant: ";
+    std::cout << "\tVotre choix d'identifiant: ";
     std::cin >> id;
     while (!std::cin.good()) {
         std::cin.clear();
@@ -141,18 +148,24 @@ void submenudelete (sqlite3* db) {
         std::cout << "\tL'entrée n'est pas un entier! Votre d'identifiant:";
         std::cin >> id;
     }
-    std::cout << "\tsuppression de l'élément ayant l'identifiant: "+ std::to_string(id) +"!\n\n";
+    std::cin.clear();
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    std::cout << "\tSuppression de l'élément "+ std::to_string(id) +"!\n\n";
     sqlitedelete (db, id);
 }
+
 
 bool quitmenu () {
     char c;
     std::cout << "\tÊtes-vous sûr de vouloir effectuer cette action? [O/N] ";
     std::cin >> c;
+    std::cin.clear();
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     if(c == 'O' || c == 'o')
         return true;
     return false;
 }
+
 
 void printresult(std::vector<contact*> contacts) {
     std::cout << "---Liste des résultats----\n\n";
@@ -164,47 +177,216 @@ void printresult(std::vector<contact*> contacts) {
     std::cout << "--------------------------\n\n";
 }
 
+
 privatecontact* subsubmenucreationprivatecontact () {
     privatecontact* pprivatecontact = nullptr;
     
     /*constact*/
     std::string firstname, lastname;
-    enumgender gender;
-    /*add*/
-    address* addpostal = nullptr;
+    
+    std::cout << "\tnom: ";
+    getline(std::cin, lastname);
+    
+    std::cout << "\tprenom: ";
+    getline(std::cin, firstname);
+    
+    enumgender gender = enumgender::F;
+    {
+        char c;
+        std::cout << "\tgenre? [M/F] ";
+        std::cin >> c;
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        if(c == 'M' || c == 'm')
+            gender = enumgender::M;
+    }
+    
+    /*address*/
+    address* paddpostal = nullptr;
+    std::string street, complement,town;
+    unsigned int number, postalcode;
+    
+    std::cout << "\taddresse:\n\t\tnuméro: ";
+    
+    std::cin >> number;
+    while(!std::cin.good()) {
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cout << "\t\tnuméro: ";
+        std::cin >> number;
+    }
+    std::cin.clear();
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    
+    std::cout << "\t\true: ";
+    getline(std::cin, street);
+    
+    {
+        char c;
+        std::cout << "\t\tVoulez-vous ajouter un complément? [O/N] ";
+        std::cin >> c;
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        if(c == 'O' || c == 'o') {
+            std::cout << "\t\tcomplément: ";
+            getline(std::cin, complement);
+        }
+    }
+    
+    std::cout << "\t\tcode postal: ";
+    std::cin >> postalcode;
+    while(!std::cin.good()) {
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cout << "\t\tcode postal: ";
+        std::cin >> postalcode;
+    }
+    std::cin.clear();
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    
+    std::cout << "\t\tville: ";
+    getline(std::cin, town);
+    
     /*date*/
-    date* birthdate = nullptr;
+    date* pbirthdate = nullptr;
+    unsigned short day, month,year;
+    std::cout << "\tdate de naissance:\n\t\tjour: ";
+     
+    std::cin >> day;
+    while(!std::cin.good()) {
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cout << "\t\tjour: ";
+        std::cin >> day;
+    }
+    std::cin.clear();
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    
+    std::cout << "\t\tmois: ";
+    std::cin >> month;
+    while(!std::cin.good()) {
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cout << "\t\tmois: ";
+        std::cin >> month;
+    }
+    std::cin.clear();
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    
+    std::cout << "\t\tannée: ";
+    std::cin >> year;
+    while(!std::cin.good()) {
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cout << "\t\tannée: ";
+        std::cin >> year;
+    }
+    std::cin.clear();
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    
+    /*creat contact*/
     try {
-        addpostal =  new address (13,"rue des moignons","",97018,"pirate town");
-        birthdate = new date (40,6,2000);
-    } catch (std::invalid_argument  exp) {
-        if (addpostal != nullptr)
-            delete addpostal;
-        if (birthdate != nullptr)
-            delete birthdate;
+        paddpostal =  new address (number, street, complement, postalcode, town);
+        pbirthdate = new date (day,month,year);
+    } catch (std::invalid_argument exp) { //if birthdate creation fail addpostal is destroyed
+        if (paddpostal != nullptr)
+            delete paddpostal;
+        if (pbirthdate != nullptr)
+            delete pbirthdate;
         throw std::invalid_argument(exp.what());
     }
-    pprivatecontact = new privatecontact (0,"roberts","bartholomew", enumgender::M, addpostal, birthdate);
+    pprivatecontact = new privatecontact (0, firstname, lastname, gender, paddpostal, pbirthdate);
     return pprivatecontact;
 }
+
 professionalcontact* subsubmenucreationprofessionalcontact (){
     professionalcontact* pprofessionalcontact = nullptr;
     
-    /*constact*/
-    std::string firstname, lastname;
-    enumgender gender;
-    /*add*/
-    address* addcompany = nullptr;
+    /*constact* && professional*/
+    std::string firstname, lastname,companyname, email;
+    std::cout << "information contact:\n";
+    std::cout << "\tnom: ";
+    getline(std::cin, lastname);
+    
+    std::cout << "\tprenom: ";
+    getline(std::cin, firstname);
+    
+    enumgender gender = enumgender::F;
+    {
+        char c;
+        std::cout << "\tgenre? [M/F] ";
+        std::cin >> c;
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        if(c == 'M' || c == 'm')
+            gender = enumgender::M;
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    }
+    
+    std::cout << "\tmail: ";
+    std::cin >> email;
+    std::cin.clear();
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    
+    std::cout << "\tnom entreprise: ";
+    getline(std::cin, companyname);
+    
+    /*address*/
+    address* paddcompany = nullptr;
+    std::string street, complement, town;
+    unsigned int number, postalcode;
+    
+    std::cout << "\taddresse:\n\t\tnuméro: ";
+    
+    std::cin >> number;
+    while(!std::cin.good()) {
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cout << "\t\tnuméro: ";
+        std::cin >> number;
+    }
+    std::cin.clear();
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    
+    std::cout << "\t\true: ";
+    getline(std::cin, street);
+    
+    {
+        char c;
+        std::cout << "\t\tVoulez-vous ajouter un complément? [O/N] ";
+        std::cin >> c;
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        if(c == 'O' || c == 'o') {
+            std::cout << "\t\tcomplément: ";
+            getline(std::cin, complement);
+        }
+    }
+    
+    std::cout << "\t\tcode postal: ";
+    std::cin >> postalcode;
+    while(!std::cin.good()) {
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cout << "\t\tcode postal: ";
+        std::cin >> postalcode;
+    }
+    std::cin.clear();
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    
+    std::cout << "\t\tville: ";
+    getline(std::cin, town);
+    
+    /*creat contact*/
     try {
-        addcompany =  new address (13,"rue des moignons","",97018,"pirate town");
-    } catch (std::invalid_argument  exp) {
-        if (addcompany != nullptr)
-            delete addcompany;
+        paddcompany =  new address (number, street, complement, postalcode, town);
+    } catch (std::invalid_argument exp) {
+        if (paddcompany != nullptr)
+            delete paddcompany;
         throw std::invalid_argument(exp.what());
     }
-    /*professional*/
-    std::string companyname, email;
     
-    pprofessionalcontact = new professionalcontact (0,"jorge","Grotadmorv", enumgender::M, addcompany,"Le Roy du recyclage","jorge.Gotadmorv.192@gmail.com");
+    pprofessionalcontact = new professionalcontact (0, firstname, lastname, gender, paddcompany, companyname, email);
     return pprofessionalcontact;
 }
