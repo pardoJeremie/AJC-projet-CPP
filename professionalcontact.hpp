@@ -33,8 +33,8 @@ private:
     void setemail (std::string);
     
     std::string companyname;
-    address* addcompany = nullptr;
     std::string email;
+    address* addcompany = nullptr;
 };
 
 #endif /* professionalcontact_hpp */
