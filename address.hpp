@@ -10,6 +10,7 @@
 
 #include <stdio.h>
 #include <string>
+#include <iostream>
 
 #define LIBELLE_MAX_SIZE 250
 #define COMPLEMENT_MAX_SIZE 250
@@ -24,12 +25,12 @@ public:
     std::string tostringpostalcode () const;
     std::string getcomplement () const {return complement;}
     std::string gettown () const {return town;}
-    
+
+private:
     void setpostalcode (unsigned int);
     void setcomplement (std::string);
     void settown (std::string);
     
-private:
     void libelleasgoodformat ();
     
     unsigned short number;

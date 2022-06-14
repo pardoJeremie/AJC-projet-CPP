@@ -21,23 +21,22 @@ public:
     contact (unsigned int, std::string, std::string, enumgender);
     virtual ~contact () {};
     
-    
     virtual std::string tostring() const = 0;
-    std::string tostringwho () const;
-    std::string tostringid () const;
     std::string tostringgender () const;
     
     unsigned int getid () const {return id;}
-    
     std::string getfirstname () const {return firstname;}
-    void setfirstname (std::string);
-    
     std::string getlastname () const {return lastname;}
-    void setlastname (std::string);
-    
     enumgender getgender () const {return gender;}
 
+protected:
+    std::string tostringwho () const;
+    std::string tostringid () const;
+    
 private:
+    void setfirstname (std::string);
+    void setlastname (std::string);
+    
     unsigned int id;
     std::string firstname;
     std::string lastname;

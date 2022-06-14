@@ -12,6 +12,7 @@
 #include <string>
 #include <sstream>
 #include <iomanip>
+#include <iostream>
 
 class date {
 public:
@@ -19,9 +20,11 @@ public:
     ~date () {}
     
     bool isbirthday ();
+    
     unsigned short getage () const;
     std::string tostring () const;
     std::string tostringsql () const;
+    
 private:
     void asgoodformat ();
     bool asgooddayformat ();

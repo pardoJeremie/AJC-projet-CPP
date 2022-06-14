@@ -110,19 +110,24 @@ void submenuselectbytown (sqlite3* db) {
 }
 
 void submenuadd (sqlite3* db) {
+    contact* pcontact = nullptr;
     try {
         char c;
         std::cout << "\tVoulez-vous ajouter un contact privé? [O/N] ";
         std::cin >> c;
         if(c == 'O' || c == 'o')
-            sqliteadd (db, subsubmenucreationprivatecontact());
+            pcontact = subsubmenucreationprivatecontact();
         else {
             std::cout << "\tVous ajoutez un contact professionnel.\n";
-            sqliteadd (db, subsubmenucreationprofessionalcontact());
+            pcontact = subsubmenucreationprofessionalcontact();
         }
+        sqliteadd (db, pcontact);
         std::cout << "\tContact ajouté!\n";
+        
     } catch (std::invalid_argument  exp) {
         std::cout << exp.what() << std::endl;
+        if (pcontact != nullptr)
+            delete pcontact;
     }
     std::cout << std::endl;
 }
@@ -161,11 +166,45 @@ void printresult(std::vector<contact*> contacts) {
 
 privatecontact* subsubmenucreationprivatecontact () {
     privatecontact* pprivatecontact = nullptr;
-    pprivatecontact = new privatecontact (102,"roberts","bartholomew", enumgender::M, new address (13,"rue des moignons","",97018,"pirate town"), new date (40,6,2000));
+    
+    /*constact*/
+    std::string firstname, lastname;
+    enumgender gender;
+    /*add*/
+    address* addpostal = nullptr;
+    /*date*/
+    date* birthdate = nullptr;
+    try {
+        addpostal =  new address (13,"rue des moignons","",97018,"pirate town");
+        birthdate = new date (40,6,2000);
+    } catch (std::invalid_argument  exp) {
+        if (addpostal != nullptr)
+            delete addpostal;
+        if (birthdate != nullptr)
+            delete birthdate;
+        throw std::invalid_argument(exp.what());
+    }
+    pprivatecontact = new privatecontact (0,"roberts","bartholomew", enumgender::M, addpostal, birthdate);
     return pprivatecontact;
 }
 professionalcontact* subsubmenucreationprofessionalcontact (){
     professionalcontact* pprofessionalcontact = nullptr;
-    pprofessionalcontact = new professionalcontact (2890,"jorge","Grotadmorv", enumgender::M, new address (2,"rue des poubelles","",17120,"ordure ville"),"Le Roy du recyclage","jorge.Gotadmorv.192@gmail.com");
+    
+    /*constact*/
+    std::string firstname, lastname;
+    enumgender gender;
+    /*add*/
+    address* addcompany = nullptr;
+    try {
+        addcompany =  new address (13,"rue des moignons","",97018,"pirate town");
+    } catch (std::invalid_argument  exp) {
+        if (addcompany != nullptr)
+            delete addcompany;
+        throw std::invalid_argument(exp.what());
+    }
+    /*professional*/
+    std::string companyname, email;
+    
+    pprofessionalcontact = new professionalcontact (0,"jorge","Grotadmorv", enumgender::M, addcompany,"Le Roy du recyclage","jorge.Gotadmorv.192@gmail.com");
     return pprofessionalcontact;
 }

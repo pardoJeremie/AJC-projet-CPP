@@ -28,10 +28,9 @@ public:
     std::string getcompanyname() const {return companyname;}
     std::string getemail() const {return email;}
     
+private:
     void setcompanyname (std::string);
     void setemail (std::string);
-    
-private:
     
     std::string companyname;
     address* addcompany = nullptr;
